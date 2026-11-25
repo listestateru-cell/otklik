@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Отклик без тишины - гайд по ИИ-отбору на hh.ru</title>
+<meta name="description" content="Гайд о том, как резюме читают алгоритмы hh.ru, и план поиска работы на 14 дней. PDF, 13 страниц, 990 ₽.">
+<meta property="og:title" content="Отклик без тишины">
+<meta property="og:description" content="Как пройти ИИ-отбор на hh.ru. Гайд и план на 14 дней.">
+<meta property="og:image" content="img/cover.jpg">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+/* Палитра гайда: кобальт + кремовый, один жёлтый акцент. Радиусы: кнопки - pill, медиа и панели - 14px. */
+:root {
+  --bg: #f4f1e7; --surface: #fffdf7; --ink: #14213d; --muted: #4a5470;
+  --blue: #2546c4; --navy: #16295e; --accent: #ffcd3c; --on-accent: #14213d;
+  --line: rgba(20, 33, 61, .12); --shadow: 0 24px 60px rgba(22, 41, 94, .18);
+  --r: 14px; --maxw: 1180px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1630; --surface: #152043; --ink: #edf0f8; --muted: #a8b2cb;
+    --blue: #7f9bff; --navy: #c9d4ff; --line: rgba(237, 240, 248, .12);
+    --shadow: 0 24px 60px rgba(0, 0, 0, .45);
+  }
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: "Golos Text", system-ui, sans-serif; background: var(--bg); color: var(--ink);
+  font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+
+/* навигация */
+.nav { height: 68px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; letter-spacing: -.01em; }
+.brand img { width: 34px; height: 34px; border-radius: 50%; }
+.nav-links { display: flex; align-items: center; gap: 28px; font-size: 15px; }
+.nav-links a { text-decoration: none; color: var(--muted); }
+.nav-links a:hover { color: var(--ink); }
+
+/* кнопки */
+.btn { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; height: 52px; padding: 0 26px;
+  border-radius: 999px; font: 600 16px/1 "Golos Text", sans-serif; text-decoration: none;
+  transition: transform .18s cubic-bezier(.16, 1, .3, 1), background-color .18s, box-shadow .18s; }
+.btn:active { transform: translateY(1px) scale(.985); }
+.btn-main { background: var(--accent); color: var(--on-accent); box-shadow: 0 8px 22px rgba(255, 205, 60, .35); }
+.btn-main:hover { background: #ffd55c; }
+.btn-ghost { border: 1.5px solid var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn-sm { height: 42px; padding: 0 18px; font-size: 15px; }
+
+/* первый экран */
+.hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; min-height: calc(100dvh - 68px); padding-top: 24px; padding-bottom: 56px; }
+.eyebrow { font-size: 14px; font-weight: 600; color: var(--blue); margin-bottom: 18px; }
+h1 { font-size: clamp(34px, 3.9vw, 50px); line-height: 1.06; letter-spacing: -.03em; font-weight: 800; max-width: 17ch; }
+.lead { margin-top: 22px; font-size: 19px; color: var(--muted); max-width: 46ch; }
+.cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+.stack { position: relative; height: min(620px, 72dvh); }
+.stack img { position: absolute; width: 58%; border-radius: var(--r); box-shadow: var(--shadow); }
+.stack .back { right: 2%; top: 4%; transform: rotate(5deg); }
+.stack .front { left: 6%; top: 14%; transform: rotate(-4deg); }
+
+/* боль */
+section { padding: 96px 0; }
+h2 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -.025em; font-weight: 800; max-width: 22ch; }
+.pains { margin-top: 44px; display: grid; gap: 0; }
+.pain { display: grid; grid-template-columns: 270px 1fr; gap: 32px; padding: 26px 0; border-top: 1px solid var(--line); align-items: baseline; }
+.pain b { font-size: 34px; letter-spacing: -.02em; color: var(--blue); }
+.pain p { font-size: 20px; max-width: 48ch; }
+.relief { margin-top: 40px; font-size: 22px; font-weight: 600; max-width: 40ch; }
+.relief span { background: linear-gradient(transparent 62%, rgba(255, 205, 60, .55) 0); }
+
+/* что внутри */
+.inside { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+.groups { display: grid; gap: 28px; margin-top: 34px; }
+.group h3 { font-size: 19px; font-weight: 800; margin-bottom: 8px; }
+.group p { color: var(--muted); max-width: 52ch; }
+.pages { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 4px 24px; }
+.pages img { flex: 0 0 auto; width: 280px; border-radius: var(--r); box-shadow: var(--shadow); scroll-snap-align: start; }
+
+/* как купить */
+.steps { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+.steps::before { content: ""; position: absolute; left: 0; right: 0; top: 23px; height: 2px; background: var(--line); }
+.step { position: relative; padding-right: 32px; }
+.step i { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--surface);
+  border: 2px solid var(--blue); font-style: normal; font-weight: 800; color: var(--blue); }
+.step h3 { margin-top: 20px; font-size: 21px; font-weight: 800; }
+.step p { margin-top: 6px; color: var(--muted); max-width: 30ch; }
+
+/* честно */
+.honest { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 44px; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 40px; }
+.honest p { color: var(--muted); }
+.honest h2 { font-size: clamp(26px, 3vw, 34px); }
+
+/* вопросы */
+.faq { max-width: 780px; }
+details { border-top: 1px solid var(--line); padding: 22px 0; }
+details:last-child { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; font-size: 19px; font-weight: 600; display: flex; justify-content: space-between; gap: 20px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-weight: 400; font-size: 26px; line-height: 1; color: var(--blue); transition: transform .2s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin-top: 12px; color: var(--muted); max-width: 62ch; }
+
+/* финал и подвал */
+.final { text-align: left; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; padding-top: 72px; padding-bottom: 72px; border-top: 1px solid var(--line); }
+footer { padding: 40px 0 56px; color: var(--muted); font-size: 14.5px; border-top: 1px solid var(--line); }
+.foot { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; }
+.foot a { color: var(--ink); }
+.foot ul { list-style: none; padding: 0; display: grid; gap: 6px; }
+
+/* мягкое появление первого экрана, только если пользователь не просил меньше анимации */
+@media (prefers-reduced-motion: no-preference) {
+  .hero > div:first-child > * { animation: rise .7s cubic-bezier(.16, 1, .3, 1) both; }
+  .hero > div:first-child > *:nth-child(2) { animation-delay: .06s; }
+  .hero > div:first-child > *:nth-child(3) { animation-delay: .12s; }
+  .hero > div:first-child > *:nth-child(4) { animation-delay: .18s; }
+  .stack img { animation: settle .9s cubic-bezier(.16, 1, .3, 1) both .1s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+  @keyframes settle { from { opacity: 0; translate: 0 24px; } }
+}
+
+/* телефон */
+@media (max-width: 860px) {
+  .nav-links a:not(.btn) { display: none; }
+  .hero, .inside, .honest, .foot, .final { grid-template-columns: 1fr; }
+  .hero { min-height: auto; gap: 28px; padding-top: 12px; }
+  .stack { height: 420px; }
+  .stack img { width: 62%; }
+  section { padding: 64px 0; }
+  .pain { grid-template-columns: 1fr; gap: 6px; }
+  .steps { grid-template-columns: 1fr; gap: 28px; }
+  .steps::before { display: none; }
+  .honest { padding: 28px; }
+  .wrap { padding-left: 16px; padding-right: 16px; }
+}
+</style>
+</head>
+<body>
+<header class="wrap nav">
+  <a class="brand" href="#"><img src="img/logo.png" alt="">Отклик без тишины</a>
+  <nav class="nav-links">
+    <a href="#inside">Что внутри</a>
+    <a href="#faq">Вопросы</a>
+    <a class="btn btn-ghost btn-sm" href="https://t.me/otklik_bez_tishiny_bot?start=site">Чек-лист бесплатно</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">Гайд для тех, кто ищет работу на hh.ru</p>
+      <h1>Чтобы на отклики отвечали, а не молчали</h1>
+      <p class="lead">Как резюме читают алгоритмы hh.ru и что в нём поменять. Плюс план поиска на 14 дней.</p>
+      <div class="cta">
+        <a class="btn btn-main" href="https://t.me/otklik_bez_tishiny_bot?start=site_buy">Купить гайд за 990 ₽</a>
+        <a class="btn btn-ghost" href="https://t.me/otklik_bez_tishiny_bot?start=site">Чек-лист бесплатно</a>
+      </div>
+    </div>
+    <div class="stack" aria-hidden="true">
+      <img class="back" src="img/page-plan.jpg" alt="">
+      <img class="front" src="img/cover.jpg" alt="Обложка гайда «Как пройти ИИ-отбор на hh.ru»">
+    </div>
+  </div>
+
+  <section class="wrap">
+    <h2>Знакомо?</h2>
+    <div class="pains">
+      <div class="pain"><b>15 минут</b><p>Отправили отклик утром, а через четверть часа пришёл отказ. Резюме за это время никто не открывал.</p></div>
+      <div class="pain"><b>Сотый отклик</b><p>Откликов десятки, приглашений почти нет. Кажется, что дело в опыте, возрасте или в вас самих.</p></div>
+      <div class="pain"><b>24 часа</b><p>В чат пришёл вопрос, вы ответили на следующий день, и отклик будто пропал.</p></div>
+    </div>
+    <p class="relief">Дело не в вас. <span>Сейчас первым резюме часто читает машина</span>, и у неё свои правила.</p>
+  </section>
+
+  <section class="wrap" id="inside">
+    <div class="inside">
+      <div>
+        <h2>Что внутри гайда</h2>
+        <div class="groups">
+          <div class="group"><h3>Как вас отбирают</h3><p>Как работает авторазбор по полям резюме, откуда отказ за 15 минут и как ИИ-помощник решает «подходите» или «не сейчас».</p></div>
+          <div class="group"><h3>Что переписать</h3><p>Название должности как в вакансиях, опыт в формате «действие, цифра, результат», поле зарплаты и сопроводительное в четыре предложения.</p></div>
+          <div class="group"><h3>Как действовать дальше</h3><p>Ответы на вопросы бота в чате, план на 14 дней, таблица откликов и готовые подсказки для нейросетей.</p></div>
+        </div>
+      </div>
+      <div class="pages" aria-label="Страницы гайда">
+        <img src="img/page-table.jpg" alt="Страница гайда: кто читает резюме раньше рекрутера" loading="lazy">
+        <img src="img/page-plan.jpg" alt="Страница гайда: план на 14 дней" loading="lazy">
+        <img src="img/page-check.jpg" alt="Страница гайда: чек-лист перед каждым откликом" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>Как получить гайд</h2>
+    <div class="steps">
+      <div class="step"><i>1</i><h3>Оплатите</h3><p>Картой или через СБП на защищённой странице Prodamus.</p></div>
+      <div class="step"><i>2</i><h3>Получите PDF</h3><p>Ссылка придёт в Telegram-бот и на почту сразу после оплаты.</p></div>
+      <div class="step"><i>3</i><h3>Пройдите план</h3><p>За вечер переделайте резюме, дальше две недели действуйте по дням.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="honest">
+      <h2>Без громких обещаний</h2>
+      <div>
+        <p>Гайд не гарантирует работу: решение принимают работодатели. Он помогает, чтобы резюме дошло до человека и было понятно с первых строк.</p>
+        <p style="margin-top:14px">Механика описана по справке и блогу hh.ru. Проект независимый и не связан с hh.ru.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="faq">
+    <h2>Вопросы</h2>
+    <div class="faq" style="margin-top:32px">
+      <details><summary>В каком формате гайд?</summary><p>PDF на 13 страниц. Удобно читать и с телефона, и с компьютера.</p></details>
+      <details><summary>Как и когда я его получу?</summary><p>Сразу после оплаты: ссылка придёт в Telegram-бот и на почту, которую вы укажете. Если за сутки ничего не пришло, напишите нам на почту.</p></details>
+      <details><summary>А если файл не откроется?</summary><p>Пришлём заново. Если не получится исправить, вернём деньги. Все условия в публичной оферте.</p></details>
+      <details><summary>Чем гайд лучше бесплатных советов?</summary><p>В нём всё собрано в одну систему: что именно поменять в резюме, как отвечать на вопросы в чате и что делать каждый день две недели.</p></details>
+      <details><summary>Куда писать вопросы?</summary><p>На почту <a href="mailto:listestateru+otklik@gmail.com">listestateru+otklik@gmail.com</a>. Отвечаем в течение трёх рабочих дней.</p></details>
+    </div>
+  </section>
+
+  <div class="wrap final">
+    <h2>Начните с бесплатного чек‑листа</h2>
+    <a class="btn btn-main" href="https://t.me/otklik_bez_tishiny_bot?start=site">Чек-лист бесплатно</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <p>Продавец: Тимофеев Севастьян Игоревич, плательщик налога на профессиональный доход (самозанятый), ИНН 860806059955.</p>
+      <p style="margin-top:8px">Почта для обращений: <a href="mailto:listestateru+otklik@gmail.com">listestateru+otklik@gmail.com</a></p>
+      <p style="margin-top:8px">Независимый проект, не связан с hh.ru. © 2026 «Отклик без тишины»</p>
+    </div>
+    <ul>
+      <li><a href="oferta.pdf">Публичная оферта</a></li>
+      <li><a href="https://t.me/otklik_bez_tishiny_bot">Telegram-бот</a></li>
+      <li><a href="https://www.instagram.com/otklik.bez.tishiny.ru/">Instagram</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
